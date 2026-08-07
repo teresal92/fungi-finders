@@ -271,6 +271,7 @@
       }
     }
   }
+
   .wrapper {
     --wrapper-max-width: 1130px;
     --wrapper-padding: 1rem;
@@ -291,42 +292,10 @@
     }
   }
 
-  .card {
-    background-color: var(--background-light);
-    padding: 1rem;
-    border-radius: var(--border-radius-3);
-  }
-
-  .site-header {
-    padding-block: 1rem;
-  }
-
-  .site-header__inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 2rem;
-    justify-content: space-between;
-  }
-
-  .primary-navigation {
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
-
   .equal-columns {
     display: grid;
     gap: var(--equal-columns-gap, 1rem);
-    align-items: var(--column-layout-alignment, start);
+    align-items: var(--column-layout-alignment, stretch);
 
     &[data-gap="large"] {
       --equal-columns-gap: 2rem;
@@ -348,5 +317,77 @@
       grid-auto-flow: column;
       grid-auto-columns: 1fr;
     }
+  }
+}
+
+@layer components {
+  .site-header {
+    padding-block: 1rem;
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    justify-content: space-between;
+  }
+
+  .card {
+    display: grid;
+    gap: var(--card-gap, 1rem);
+    background-color: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius-3);
+
+    img {
+      border-radius: var(--border-radius-2);
+    }
+  }
+
+  .card__title {
+    font-size: var(--card-title-font-size, var(--font-size-heading-sm));
+    color: var(--card-title-color, var(--text-brand));
+  }
+
+  .primary-navigation {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .hero {
+    text-align: center;
+    background-image: url(/assets/hero.webp);
+    background-size: cover;
+    font-size: var(--font-size-md);
+    color: var(--text-high-contrast);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-heading-lg);
+
+    > span {
+      display: block;
+      font-size: var(--font-size-heading-xl);
+      color: var(--text-brand);
+    }
+  }
+
+  .mushroom-guide {
+    --card-title-font-size: var(--font-size-lg);
+    --card-title-color: var(--text-high-contrast);
+  }
+
+  .faq-bento-grid {
+    --card-title-color: var(--text-high-contrast);
   }
 }

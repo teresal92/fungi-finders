@@ -278,4 +278,10 @@
       --wrapper-max-width: 1330px;
     }
   }
+
+  .card {
+    background-color: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius-3);
+  }
 }

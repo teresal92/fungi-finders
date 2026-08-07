@@ -332,6 +332,45 @@
     justify-content: space-between;
   }
 
+  .primary-navigation {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .site-footer {
+    text-align: center;
+    background-color: var(--background-dark);
+    padding-block: 2rem;
+    display: grid;
+    gap: 2rem;
+
+    a {
+      text-decoration: none;
+      color: var(--text-main);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--text-brand-light);
+      }
+    }
+  }
+
+  .site-footer__title {
+    font-weight: 700;
+    font-size: var(--font-size-md);
+    font-family: var(--ff-heading);
+  }
+
   .card {
     display: grid;
     gap: var(--card-gap, 1rem);
@@ -347,21 +386,6 @@
   .card__title {
     font-size: var(--card-title-font-size, var(--font-size-heading-sm));
     color: var(--card-title-color, var(--text-brand));
-  }
-
-  .primary-navigation {
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    a {
-      text-decoration: none;
-    }
   }
 
   .hero {

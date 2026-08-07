@@ -390,4 +390,22 @@
   .faq-bento-grid {
     --card-title-color: var(--text-high-contrast);
   }
+
+  .button {
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+    background-color: var(--background-accent-main);
+    text-decoration: none;
+    font-size: var(--font-size-md);
+    font-family: var(--ff-heading);
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--background-accent-light);
+      color: var(--text-high-contrast);
+    }
+  }
 }

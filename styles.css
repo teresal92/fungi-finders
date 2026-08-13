@@ -328,6 +328,12 @@
     );
     gap: 1rem;
   }
+
+  .flex-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 @layer components {
@@ -497,6 +503,15 @@
       background-color: var(--background-accent-light);
       color: var(--text-high-contrast);
     }
+  }
+
+  select {
+    padding: 0.5rem 1rem;
+    background-color: var(--background-accent-main);
+    color: var(--text-high-contrast);
+    border: 0;
+    border-radius: var(--border-radius-1);
+    font-family: var(--ff-heading);
   }
 
   .tag-list {

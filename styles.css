@@ -145,8 +145,19 @@
     }
   }
 
-  body {
+  html {
     font-family: var(--ff-body);
+    line-height: 1.6;
+    scroll-padding: 2rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
     font-size: var(--font-size-regular);
     color: var(--text-main);
     background-color: var(--background-main);
@@ -323,6 +334,22 @@
       grid-auto-columns: 1fr;
     }
   }
+
+  .grid-auto-fit {
+    --auto-fit-min-col-size: 250px;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--auto-fit-min-col-size), 100%), 1fr)
+    );
+    gap: 1rem;
+  }
+
+  .flex-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 @layer components {
@@ -443,7 +470,8 @@
   }
 
   .card {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--card-gap, 1rem);
     background-color: var(--background-light);
     padding: 1rem;
@@ -457,6 +485,14 @@
   .card__title {
     font-size: var(--card-title-font-size, var(--font-size-heading-sm));
     color: var(--card-title-color, var(--text-brand));
+  }
+
+  .card__note {
+    margin-top: auto;
+    background-color: var(--background-extra-light);
+
+    border-radius: var(--border-radius-2);
+    padding: 0.75rem;
   }
 
   .hero {
@@ -480,10 +516,66 @@
   .mushroom-guide {
     --card-title-font-size: var(--font-size-lg);
     --card-title-color: var(--text-high-contrast);
+
+    --card-gap: 0.75rem;
   }
 
-  .faq-bento-grid {
+  .faq-bento {
     --card-title-color: var(--text-high-contrast);
+    display: grid;
+    gap: 1rem;
+
+    grid-template-areas:
+      "card-one"
+      "card-two"
+      "card-three"
+      "card-four";
+
+    @media (width > 600px) {
+      grid-template-areas:
+        "card-four card-one"
+        "card-three card-two";
+
+      .card:nth-child(even) > img {
+        order: 3;
+      }
+    }
+
+    @media (width > 900px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "card-one card-two card-four"
+        "card-three card-three card-four";
+    }
+
+    .card > img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card:nth-child(1) {
+      grid-area: card-one;
+    }
+    .card:nth-child(2) {
+      grid-area: card-two;
+    }
+    .card:nth-child(3) {
+      grid-area: card-three;
+
+      @media (width > 900px) {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      img {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+      }
+    }
+    .card:nth-child(4) {
+      grid-area: card-four;
+    }
   }
 
   .button {
@@ -501,6 +593,47 @@
     &:focus-visible {
       background-color: var(--background-accent-light);
       color: var(--text-high-contrast);
+    }
+  }
+
+  select {
+    padding: 0.5rem 1rem;
+    background-color: var(--background-accent-main);
+    color: var(--text-high-contrast);
+    border: 0;
+    border-radius: var(--border-radius-1);
+    font-family: var(--ff-heading);
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag-list > li {
+    padding: 0 0.5rem;
+    color: var(---text-high-contrast);
+    font-family: var(--ff-heading);
+    font-size: var(--font-size-sm);
+    background-color: var(--tag-background);
+    border-radius: var(--border-radius-1);
+
+    &[data-season="spring"] {
+      --tag-background: var(--clr-teal-500);
+    }
+    &[data-season="summer"] {
+      --tag-background: var(--clr-green-500);
+    }
+    &[data-season="fall"] {
+      --tag-background: var(--clr-red-500);
+    }
+
+    &[data-edible="edible"] {
+      --tag-background: var(--clr-green-500);
+    }
+    &[data-edible="toxic"] {
+      --tag-background: var(--clr-red-500);
     }
   }
 }

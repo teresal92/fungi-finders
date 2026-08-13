@@ -320,8 +320,13 @@
   }
 
   .grid-auto-fit {
+    --auto-fit-min-col-size: 250px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(var(--auto-fit-min-col-size), 100%), 1fr)
+    );
+    gap: 1rem;
   }
 }
 
@@ -444,7 +449,7 @@
     background-color: var(--background-extra-light);
 
     border-radius: var(--border-radius-2);
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
   }
 
   .hero {
@@ -470,7 +475,6 @@
     --card-title-color: var(--text-high-contrast);
 
     --card-gap: 0.75rem;
-    gap: 1rem;
   }
 
   .faq-bento-grid {
@@ -498,6 +502,7 @@
   .tag-list {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .tag-list > li {

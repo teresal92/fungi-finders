@@ -450,6 +450,9 @@
     padding: 1rem;
     border-radius: var(--border-radius-3);
 
+    animation: fade-in both;
+    animation-timeline: view();
+
     img {
       border-radius: var(--border-radius-2);
     }
@@ -474,6 +477,10 @@
     background-size: cover;
     font-size: var(--font-size-md);
     color: var(--text-high-contrast);
+
+    animation: fade-out forwards;
+    animation-timeline: view();
+    animation-range-start: exit;
   }
 
   .hero__title {
@@ -701,5 +708,23 @@
   .skip-to-main {
     background: var(--clr-green-500);
     font-size: var(--fs-600);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

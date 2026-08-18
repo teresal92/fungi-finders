@@ -1,3 +1,7 @@
+@view-transition {
+  navigation: auto;
+}
+
 @layer reset {
   *,
   *::before,
@@ -299,6 +303,9 @@
 
   .site-header {
     padding-block: 1rem;
+
+    overflow-x: clip;
+    position: relative;
   }
 
   .site-header__inner {
@@ -338,8 +345,19 @@
       }
     }
 
+    .site-header {
+      position: relative;
+    }
+
     .primary-navigation {
       display: none;
+      opacity: 0;
+
+      transition:
+        opacity 1s,
+        display 1s;
+      transition-behavior: allow-discrete;
+
       z-index: 10;
       position: absolute;
       top: 0;
@@ -356,6 +374,22 @@
         font-family: var(--ff-heading);
       }
 
+      li {
+        --delay: 1s;
+        translate: 50%;
+        transition:
+          translate 1s var(--delay),
+          opacity 1s var(--delay);
+      }
+
+      li:nth-child(2) {
+        --delay: 1.25s;
+      }
+
+      li:nth-child(3) {
+        --delay: 1.5s;
+      }
+
       li + li {
         margin-block-start: 1rem;
         padding-block-start: 1rem;
@@ -365,6 +399,22 @@
 
     [aria-expanded="true"] ~ .primary-navigation {
       display: block;
+      opacity: 1;
+
+      @starting-style {
+        display: block;
+        opacity: 0;
+      }
+
+      li {
+        translate: 0;
+        opacity: 1;
+
+        @starting-style {
+          translate: 100%;
+          opacity: 0;
+        }
+      }
     }
   }
 
@@ -400,6 +450,9 @@
     padding: 1rem;
     border-radius: var(--border-radius-3);
 
+    animation: fade-in both;
+    animation-timeline: view();
+
     img {
       border-radius: var(--border-radius-2);
     }
@@ -424,6 +477,10 @@
     background-size: cover;
     font-size: var(--font-size-md);
     color: var(--text-high-contrast);
+
+    animation: fade-out forwards;
+    animation-timeline: view();
+    animation-range-start: exit;
   }
 
   .hero__title {
@@ -573,6 +630,11 @@
     display: none;
   }
 
+  .resizing * {
+    transition: none !important;
+    animation: none !important;
+  }
+
   .text-center {
     text-align: center;
   }
@@ -646,5 +708,23 @@
   .skip-to-main {
     background: var(--clr-green-500);
     font-size: var(--fs-600);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

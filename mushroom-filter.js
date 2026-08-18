@@ -10,11 +10,29 @@ const currentFilters = {
   edible: "all",
 };
 
+const resizeObserver = new ResizeObserver((entries) => {
+  document.body.classList.add("resizing");
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove("resizing");
+  });
+});
+
+cards.forEach((card, index) => {
+  const mushroomId = `mushroom-${index + 1}`;
+  card.style.viewTransitionName = `card-${mushroomId}`;
+});
+
 function updateFilter(e) {
   const filterType = e.target.name;
   currentFilters[filterType] = e.target.value;
 
-  filterCards();
+  // progressive enhancement
+  if (!document.startViewTransition()) {
+    filterCards();
+    return;
+  }
+  document.startViewTransition(() => filterCards());
 }
 
 seasonalFilter.addEventListener("change", updateFilter);
@@ -54,3 +72,5 @@ function enableFiltering() {
 }
 
 enableFiltering();
+
+resizeObserver.observe(document.body);

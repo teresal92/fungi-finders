@@ -623,6 +623,11 @@
     display: none;
   }
 
+  .resizing * {
+    transition: none !important;
+    animation: none !important;
+  }
+
   .text-center {
     text-align: center;
   }

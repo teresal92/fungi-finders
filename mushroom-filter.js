@@ -10,6 +10,14 @@ const currentFilters = {
   edible: "all",
 };
 
+const resizeObserver = new ResizeObserver((entries) => {
+  document.body.classList.add("resizing");
+
+  requestAnimationFrame(() => {
+    document.body.classList.remove("resizing");
+  });
+});
+
 cards.forEach((card, index) => {
   const mushroomId = `mushroom-${index + 1}`;
   card.style.viewTransitionName = `card-${mushroomId}`;
@@ -64,3 +72,5 @@ function enableFiltering() {
 }
 
 enableFiltering();
+
+resizeObserver.observe(document.body);
